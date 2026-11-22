@@ -9,6 +9,9 @@ Take the guesswork out of creating bounding-box layouts for [MOSS-Image](https:/
   <em>The Layout Studio for MOSS-Image</em>
 </p>
 
+### 🚀 **[Launch the Live Web Demo](https://rexoplanets.github.io/layout-studio-moss-image/Layout_Studio_for_MOSS_Image.html)**
+*(No installation required — runs directly in your browser. Prefer offline use? Download the latest release from the [Releases](../../releases/latest) page) or [load it directly in ComfyUI](#getting-started).*
+
 ---
 
 ## Table of Contents

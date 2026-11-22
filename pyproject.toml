@@ -1,0 +1,16 @@
+[project]
+name = "layout-studio-moss-image"
+description = "Wraps The Layout Studio for MOSS-Image (v1.1.1) inside ComfyUI via an embedded interface."
+version = "1.1.1"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/Rexoplanets/layout-studio-moss-image-comfy-node"
+Documentation = "https://github.com/Rexoplanets/layout-studio-moss-image-comfy-node/blob/main/README.md"
+
+[tool.comfy]
+PublisherId = "rexoplanets"
+DisplayName = "The Layout Studio for MOSS-Image"
+Icon = "https://raw.githubusercontent.com/Rexoplanets/layout-studio-moss-image-comfy-node/main/standalone_app/assets/images/layout-studio-for-moss-rexo-logo-256x256.png"

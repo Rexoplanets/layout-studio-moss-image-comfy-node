@@ -1,0 +1,786 @@
+{
+  "id": "7b96fdbb-87a8-4b6a-88ec-177353dce6ce",
+  "revision": 2,
+  "last_node_id": 58,
+  "last_link_id": 104,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1041.1705404263837,
+        303.33372712715527
+      ],
+      "size": [
+        370.1997720554955,
+        88
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 104
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "moss-image Positive",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "text": ""
+      }
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        814.4430410353345,
+        627.2739921355587
+      ],
+      "size": [
+        420.8736882095527,
+        130.77885938984025
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "moss-image Negative",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "worst quality, bad anatomy, watermark, jpeg artifact"
+      ],
+      "widgets_values_named": {
+        "text": "worst quality, bad anatomy, watermark, jpeg artifact"
+      }
+    },
+    {
+      "id": 16,
+      "type": "KSampler",
+      "pos": [
+        1542.6653213680167,
+        178.64205327581476
+      ],
+      "size": [
+        270,
+        480
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 98
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 19
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 103
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        887768118571087,
+        "randomize",
+        8,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 887768118571087,
+        "control_after_generate": "randomize",
+        "steps": 8,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 17,
+      "type": "VAEDecode",
+      "pos": [
+        1849.1705685298057,
+        150.29460087520783
+      ],
+      "size": [
+        151.16666412353516,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 46
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 18,
+      "type": "SaveImage",
+      "pos": [
+        1840.3061020812047,
+        197.33977872567465
+      ],
+      "size": [
+        480,
+        530
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "moss-image/moss"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "moss-image/moss"
+      }
+    },
+    {
+      "id": 25,
+      "type": "VAELoader",
+      "pos": [
+        298.0798194920434,
+        590.8960652081371
+      ],
+      "size": [
+        260,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            46
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.40.0",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux2-vae_small.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "flux2-vae_small.safetensors"
+      }
+    },
+    {
+      "id": 31,
+      "type": "CLIPLoader",
+      "pos": [
+        300,
+        10
+      ],
+      "size": [
+        260,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            54,
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.41.0",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3.5_9b_w4a8_gptq.safetensors",
+        "moss_image",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3.5_9b_w4a8_gptq.safetensors",
+        "type": "moss_image",
+        "device": "default"
+      }
+    },
+    {
+      "id": 32,
+      "type": "UNETLoader",
+      "pos": [
+        300,
+        160
+      ],
+      "size": [
+        260,
+        90
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            99
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.41.0",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "moss_image_sft_turbo_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "moss_image_sft_turbo_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 34,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        300,
+        290
+      ],
+      "size": [
+        260,
+        90
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            100
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.41.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "8-steps-dmd2-lora.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "8-steps-dmd2-lora.safetensors",
+        "strength_model": 1
+      }
+    },
+    {
+      "id": 37,
+      "type": "ModelAttentionBackend",
+      "pos": [
+        610,
+        10
+      ],
+      "size": [
+        410,
+        60
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            98
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.41.0",
+        "Node name for S&R": "ModelAttentionBackend"
+      },
+      "widgets_values": [
+        "comfy kitchen attention"
+      ],
+      "widgets_values_named": {
+        "attention": "comfy kitchen attention"
+      }
+    },
+    {
+      "id": 39,
+      "type": "SeedNode",
+      "pos": [
+        610,
+        110
+      ],
+      "size": [
+        410,
+        90
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            72
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.41.0",
+        "Node name for S&R": "SeedNode"
+      },
+      "widgets_values": [
+        62837303362514,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "seed": 62837303362514,
+        "control_after_generate": "randomize"
+      }
+    },
+    {
+      "id": 57,
+      "type": "LayoutStudioMOSSImageNode",
+      "pos": [
+        616.6189688803277,
+        304.6565907620384
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "JSON prompt",
+          "type": "STRING",
+          "links": [
+            104
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "Rexoplanets/layout-studio-moss-image-comfy-node",
+        "ver": "22713d74548f0d658f1379c4192120b9a3ecd293",
+        "Node name for S&R": "LayoutStudioMOSSImageNode"
+      },
+      "widgets_values": [
+        "{\n  \"summary\": {\n    \"caption\": \"A professional cinematic poster with bold typography and detailed background elements\",\n    \"meta\": [\n      \"poster\"\n    ],\n    \"canvas\": \"single\"\n  },\n  \"items\": [\n    {\n      \"label\": \"text\",\n      \"text\": \"MOSS-IMAGE\",\n      \"caption\": \"bold metallic gold serif typography\",\n      \"bbox\": [\n        -450,\n        -400,\n        -250,\n        400\n      ]\n    },\n    {\n      \"label\": \"object\",\n      \"caption\": \"a futuristic obsidian monolith glowing with neon cyan energy\",\n      \"bbox\": [\n        -150,\n        -300,\n        450,\n        300\n      ]\n    }\n  ],\n  \"bbox_coord_space\": \"abs_centralized\",\n  \"bbox_format\": \"yxyx\"\n}",
+        null
+      ],
+      "widgets_values_named": {
+        "JSON prompt": "{\n  \"summary\": {\n    \"caption\": \"A professional cinematic poster with bold typography and detailed background elements\",\n    \"meta\": [\n      \"poster\"\n    ],\n    \"canvas\": \"single\"\n  },\n  \"items\": [\n    {\n      \"label\": \"text\",\n      \"text\": \"MOSS-IMAGE\",\n      \"caption\": \"bold metallic gold serif typography\",\n      \"bbox\": [\n        -450,\n        -400,\n        -250,\n        400\n      ]\n    },\n    {\n      \"label\": \"object\",\n      \"caption\": \"a futuristic obsidian monolith glowing with neon cyan energy\",\n      \"bbox\": [\n        -150,\n        -300,\n        450,\n        300\n      ]\n    }\n  ],\n  \"bbox_coord_space\": \"abs_centralized\",\n  \"bbox_format\": \"yxyx\"\n}",
+        "Open Layout Studio": null
+      }
+    },
+    {
+      "id": 58,
+      "type": "EmptyLatentImage",
+      "pos": [
+        297.8224895327913,
+        699.0840797946889
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            103
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.45.0",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    }
+  ],
+  "links": [
+    [
+      18,
+      4,
+      0,
+      16,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      19,
+      5,
+      0,
+      16,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      17,
+      0,
+      18,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      16,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      46,
+      25,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      54,
+      31,
+      0,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      31,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      72,
+      39,
+      0,
+      16,
+      4,
+      "INT"
+    ],
+    [
+      98,
+      37,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      99,
+      32,
+      0,
+      34,
+      0,
+      "MODEL"
+    ],
+    [
+      100,
+      34,
+      0,
+      37,
+      0,
+      "MODEL"
+    ],
+    [
+      103,
+      58,
+      0,
+      16,
+      3,
+      "LATENT"
+    ],
+    [
+      104,
+      57,
+      0,
+      4,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Model",
+      "bounding": [
+        280,
+        -70,
+        300,
+        570
+      ],
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Group",
+      "bounding": [
+        600,
+        -70,
+        430,
+        280
+      ],
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Prompt",
+      "bounding": [
+        600,
+        220,
+        863.7387816330654,
+        567.2739921355588
+      ],
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Image",
+      "bounding": [
+        1839.1705685298057,
+        90.29460087520782,
+        500,
+        650
+      ],
+      "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "Vae and Dimensions",
+      "bounding": [
+        280,
+        510,
+        302.88027076193475,
+        329.75151612603963
+      ],
+      "flags": {}
+    },
+    {
+      "id": 9,
+      "title": "Ksampler",
+      "bounding": [
+        1532.6653213680167,
+        98.6420532758148,
+        290,
+        580
+      ],
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.6227381308522544,
+      "offset": [
+        -615.044432457268,
+        -44.64044279998299
+      ]
+    },
+    "frontendVersion": "1.59.4",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "extensions": {
+    "widget_idx_map": {
+      "16": {
+        "seed": 0,
+        "sampler_name": 4,
+        "scheduler": 5
+      }
+    },
+    "seed_widgets": {
+      "16": 0
+    }
+  },
+  "version": 0.4
+}

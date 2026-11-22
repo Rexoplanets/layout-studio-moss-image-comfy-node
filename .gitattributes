@@ -1,2 +1,5 @@
 standalone_app/assets/images/screenshots/ export-ignore
 README.md export-ignore
+.DS_Store export-ignore
+standalone_app/.DS_Store export-ignore
+standalone_app/assets/.DS_Store export-ignore
